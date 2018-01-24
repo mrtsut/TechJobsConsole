@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
 using System.Text;
 
 namespace TechJobsConsole
@@ -15,6 +14,10 @@ namespace TechJobsConsole
             LoadData();
             return AllJobs;
         }
+
+
+
+
 
         /*
          * Returns a list of all values contained in a given column,
@@ -38,7 +41,54 @@ namespace TechJobsConsole
             return values;
         }
 
-        public static List<Dictionary<string, string>> FindByColumnAndValue(string column, string value)
+
+        public static List<Dictionary<string, string>> FindByValue(string value)   // searchTerm passed in as value
+        {
+            List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();   // new list of dictionary items named jobs
+            if (value == "")
+            {
+                System.Console.WriteLine("No Search Term was entered");
+                return jobs;    
+            }
+
+            else
+            {
+
+                // load data, if not already loaded
+                LoadData();
+
+                
+
+                foreach (Dictionary<string, string> jobListing in AllJobs)
+                {
+                    foreach (KeyValuePair<string, string> data in jobListing)
+                    {
+                        string title = data.Key;
+                        string description = data.Value;
+
+                        if (title.Contains(value) || description.Contains(value))
+                        {
+                            jobs.Add(jobListing);
+                        }
+                    }
+
+
+                }
+                return jobs;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+            public static List<Dictionary<string, string>> FindByColumnAndValue(string column, string value)
         {
             // load data, if not already loaded
             LoadData();
