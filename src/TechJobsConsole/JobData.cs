@@ -36,6 +36,7 @@ namespace TechJobsConsole
                 if (!values.Contains(aValue))
                 {
                     values.Add(aValue);
+                    
                 }
             }
             return values;
@@ -66,9 +67,10 @@ namespace TechJobsConsole
                         string title = data.Key;
                         string description = data.Value;
 
-                        if (title.Contains(value) || description.Contains(value))
+                        if (title.ToLower().Contains(value) || description.ToLower().Contains(value))
                         {
                             jobs.Add(jobListing);
+                            break;   // break allows the search to exit as soon as the term is found so that if the search term appears more than once it does not return another copy to the list.
                         }
                     }
 
@@ -99,9 +101,10 @@ namespace TechJobsConsole
             {
                 string aValue = row[column];
 
-                if (aValue.Contains(value))
+                if (aValue.ToLower().Contains(value))
                 {
                     jobs.Add(row);
+                    break;   // break allows the search to exit as soon as the term is found so that if the search term appears more than once it does not return another copy to the list.
                 }
             }
 

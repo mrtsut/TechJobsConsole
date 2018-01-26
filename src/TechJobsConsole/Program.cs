@@ -10,12 +10,12 @@ namespace TechJobsConsole
             // Create two Dictionary vars to hold info for menu and data
 
             // Top-level menu options
-            Dictionary<string, string> actionChoices = new Dictionary<string, string>();
+            Dictionary<string, string> actionChoices = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
             actionChoices.Add("search", "Search");
             actionChoices.Add("list", "List");
 
             // Column options
-            Dictionary<string, string> columnChoices = new Dictionary<string, string>();
+            Dictionary<string, string> columnChoices = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
             columnChoices.Add("core competency", "Skill");
             columnChoices.Add("employer", "Employer");
             columnChoices.Add("location", "Location");
@@ -56,7 +56,9 @@ namespace TechJobsConsole
 
                     // What is their search term?
                     Console.WriteLine("\nSearch term: ");
-                    string searchTerm = Console.ReadLine();
+                    string searchTermRaw = "";
+                    searchTermRaw = Console.ReadLine();
+                    string searchTerm = searchTermRaw.ToLower();    // converts search to to all lowercase
 
                     List<Dictionary<string, string>> searchResults;
 
